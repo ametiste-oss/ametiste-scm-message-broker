@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+                           http://www.springframework.org/schema/integration/jms  http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+       <context:annotation-config/>
+       <bean class="org.ametiste.scm.broker.boot.config.ActiveMQConfiguration"/>
+
+       <context:property-placeholder location="classpath:application.properties"/>
+
+       <int:gateway service-interface="org.ametiste.scm.broker.processing.EventMessageProcessor"
+                    default-request-channel="incomingEventsChannel"/>
+
+       <int-jms:channel id="incomingEventsChannel" message-driven="false"
+                        queue-name="${org.ametiste.scm.broker.amq.queue-name.raw-event:queue.raw}"
+                        connection-factory="connectionFactory"/>
+
+       <int:aggregator input-channel="incomingEventsChannel" output-channel="jmsEventMessageChannel"
+                       group-timeout="${org.ametiste.scm.broker.group.timeout}"
+                       expire-groups-upon-timeout="false"
+                       expire-groups-upon-completion="true"
+                       send-partial-result-on-expiry="true"
+                       correlation-strategy-expression="123"
+                       release-strategy-expression="size() == ${org.ametiste.scm.broker.group.threshold}"/>
+
+       <int-jms:channel id="jmsEventMessageChannel" message-driven="true"
+                        queue-name="${org.ametiste.scm.broker.amq.queue-name.aggregated-event:queue.aggregated}"
+                        connection-factory="connectionFactory"
+                        transaction-manager="jmsTransactionManager"/>
+
+       <int:service-activator input-channel="jmsEventMessageChannel" ref="eventMessageBroadcaster" method="broadcast"/>
+
+       <int:poller default="true" fixed-delay="${org.ametiste.scm.broker.broadcast.timeout}"/>
+</beans>

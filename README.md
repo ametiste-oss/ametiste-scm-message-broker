@@ -1,2 +1,2 @@
-# ametiste-scm-message-broker
-SCM Message Broker Service
+# Ametiste SCM Message Broker
+
