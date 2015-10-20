@@ -14,17 +14,15 @@ allprojects {
     version '0.1.0-SNAPSHOT'
 
     repositories {
-        // TODO: change to jcenter after libs accept
-        maven {
-            url  "http://dl.bintray.com/ametiste-oss/maven"
-        }
         mavenCentral()
+        jcenter()
     }
 }
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
+    apply plugin: 'jacoco'
     apply from: '../dependencies.gradle'
 
     apply from: "https://raw.githubusercontent.com/ametiste-oss/ametiste-bintray-gradle/master/bintray-ext-ame-oss.gradle"
@@ -71,6 +69,10 @@ subprojects {
         archives sourcesJar
         archives javadocJar
     }
+/*
+    task cleanX(type: Clean, depandsOn: clean) {
+
+    }*/
 
     test.outputs.upToDateWhen { false }
     test.testLogging.showStandardStreams = true
@@ -80,6 +82,15 @@ subprojects {
             println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
         }
     }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
+    }
+
+    check.dependsOn jacocoTestReport
 }
 
 configure(rootProject) {

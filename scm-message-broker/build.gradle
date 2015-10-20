@@ -13,6 +13,11 @@ apply plugin: 'spring-boot'
 apply plugin: 'groovy'
 apply from: "https://raw.githubusercontent.com/ametiste-oss/ametiste-bintray-gradle/master/bintray.gradle"
 
+clean {
+    delete 'activemq-data'
+    delete 'logs'
+}
+
 jar {
     manifest.attributes['Implementation-Title'] = project.name
     manifest.attributes['Implementation-Version'] = project.version
