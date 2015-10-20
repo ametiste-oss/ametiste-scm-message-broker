@@ -5,13 +5,19 @@
 [![codecov.io](https://codecov.io/github/ametiste-oss/ametiste-scm-message-broker/coverage.svg?branch=master&precision=2)](https://codecov.io/github/ametiste-oss/ametiste-scm-message-broker?branch=master)
 
 ## Table Of Content
+
 - [Overview](#overview)
 - [Usage](#usage)
   - [Artifact](#artifact)
   - [Installation](#installation)
   - [Requirements](#requirements)
-  - [Configuration proprties](#configuration-properties)
+  - [Configuration properties](#configuration-properties)
 - [Structure and processing logic](#structure-and-processing-logic)
+  - [Transport events](#transport-events)
+  - [Fetching subscribers](#fetching-subscribers)
+  - [Processing messages](#processing-messages)
+    - [Queue pipeline](#queue-pipeline)
+    - [Broadcasting](#broadcasting)
 
 ## Overview
 
@@ -21,22 +27,28 @@
 
 #### Artifact
 
-Message Broker is Spring Boot application and disctributed as jar file. It placed in `jcenter()` repository:
+Message Broker is Spring Boot application and distributed as jar file. It placed in `jcenter()` repository:
 ```
 http://jcenter.bintray.com/org/ametiste/scm/scm-message-broker/
 ```
-Also release store on github and at last you can build artifact itself from sources.
+Also release store on github or you can build artifact itself from sources.
 
 #### Installation
+
+***TODO***
 
 #### Requirements
 - JDK 1.8 or higher.
 
 #### Configuration properties
 
+***TODO***
+
 ## Structure and processing logic
 
 #### Transport events
+
+For receiving and sending transport messages with event payload used [*SCM Messaging Library*](https://github.com/ametiste-oss/ametiste-scm-messaging).
 
 #### Fetching subscribers
 
