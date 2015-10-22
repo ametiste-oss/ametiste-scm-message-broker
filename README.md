@@ -30,6 +30,8 @@ http://jcenter.bintray.com/org/ametiste/scm/scm-message-broker/
 ```
 Also releases stored on github or you can build artifact by itself from sources.
 
+#### Installation
+
 Installation process include next steps:
 
 1. Get a ready-to-deploy jar file:
@@ -37,7 +39,7 @@ Installation process include next steps:
   2. build artifact from sources:<br/>project based on Gradle, so to build execute next command from project root directory:<br/><code>gradle build</code>
 2. Deploy jar file to the target server.
 3. Configure properties for Broker (see [here](#configuration-properties)).
-4. Start service by executing:<br/><code>java -jar dph-scm-event-broker-[version].jar</code>.
+4. Start service by executing:<br/><code>java -jar dph-scm-message-broker-[version].jar</code>.
 
 #### Requirements
 - JDK 1.8 or higher.
@@ -71,8 +73,8 @@ Service use ActiveMQ for storing queues of messages and has next properties:
 |`org.ametiste.scm.broker.amq.queue-name.raw-event`|string|Name of queue for raw events received from system instances.|`queue.raw`|
 |`org.ametiste.scm.broker.amq.queue-name.aggregated-event`|string|Name of queue for aggregated lists of messages.|`queue.aggregated`|
 |`org.ametiste.scm.broker.amq.broker-url`|URL|Configuration URL for ActiveMQ broker ([more info](http://activemq.apache.org/broker-uri.html)).|`vm://localhost`|
-|`org.ametiste.scm.broker.amq.username`|string|Username to access to ActiveMQ broker.||
-|`org.ametiste.scm.broker.amq.password`|string|Password to access to ActiveMQ broker.||
+|`org.ametiste.scm.broker.amq.username`|string|Username for access to ActiveMQ broker.||
+|`org.ametiste.scm.broker.amq.password`|string|Password for access to ActiveMQ broker.||
 
 ##### SCM Coordinator properties
 Broker use SCM SubscribersFetcher configuration from Scm Coordinator Library and require define properties for it:
@@ -89,8 +91,6 @@ You can provide and other spring cloud eureka properties for discovering client.
 #### Transport events
 
 For receiving and sending transport messages with event payload used [*SCM Messaging Library*](https://github.com/ametiste-oss/ametiste-scm-messaging).
-
-#### Fetching subscribers
 
 #### Fetching subscribers
 
