@@ -81,7 +81,7 @@ Broker use SCM SubscribersFetcher configuration from Scm Coordinator Library and
 
 |Name|Type|Description|Default|
 |----|----|-----------|-------|
-|`spring.application.name`|string|Name of application.|`scm-message-broker``|
+|`spring.application.name`|string|Name of application.|`scm-message-broker`|
 |`eureka.client.serviceUrl.defaultZone`|URL|URL to Eureka Server instance.<br/>:warning: *Important*: end URL with back slash symbol "/".|`http://localhost:8761/eureka/`|
 
 You can provide and other spring cloud eureka properties for discovering client.
