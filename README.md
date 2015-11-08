@@ -1,7 +1,10 @@
 # SCM Message Broker
 
+Link to umbrella project: [>> System's Configuration Management <<](https://github.com/ametiste-oss/ametiste-scm)
+
 ## Build Status
 [![Build Status](https://travis-ci.org/ametiste-oss/ametiste-scm-message-broker.svg?branch=master)](https://travis-ci.org/ametiste-oss/ametiste-scm-message-broker)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/7f40cf615e734819a291742e477b2543)](https://www.codacy.com/app/Ametiste-OSS/ametiste-scm-message-broker)
 [![codecov.io](https://codecov.io/github/ametiste-oss/ametiste-scm-message-broker/coverage.svg?branch=master&precision=2)](https://codecov.io/github/ametiste-oss/ametiste-scm-message-broker?branch=master)
 
 ## Table Of Content
