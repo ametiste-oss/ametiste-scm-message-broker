@@ -25,6 +25,8 @@ ext {
             ],
             ametisteScmMessageReceiverStarter :
                     "org.ametiste.scm:scm-message-receiver-starter:${ametisteScmMessagingLibVersion}",
+            ametisteScmCoordinatorCore:
+                    "org.ametiste.scm:scm-coordination-core:${ametisteScmCoordinatorVersion}",
             ametisteScmCoordinatorEureka:
                     "org.ametiste.scm:scm-coordination-spring-cloud-eureka:${ametisteScmCoordinatorVersion}",
             ametisteScmSubscribersFetcherStarter:

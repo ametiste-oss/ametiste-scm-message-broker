@@ -1,0 +1,14 @@
+description = 'SCM Event Message Broker Core'
+
+apply plugin: 'groovy'
+
+dependencies {
+    compile libraries.commonLang3,
+            libraries.slf4j
+
+    compile libraries.ametisteScmMessagingComponents,
+            libraries.ametisteScmCoordinatorCore
+
+    testCompile libraries.spock,
+                libraries.ametisteScmCoordinatorEureka
+}

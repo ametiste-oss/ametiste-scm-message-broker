@@ -1,16 +1,14 @@
 package org.ametiste.scm.broker
 
+import org.ametiste.scm.broker.boot.config.EventBrokerTestConfiguration
+import org.ametiste.scm.broker.mock.EventSenderMock
+import org.ametiste.scm.broker.mock.EventSubscribersFetcherMock
 import org.ametiste.scm.messaging.data.event.Event
 import org.ametiste.scm.messaging.data.event.InstanceLifecycleEvent
-import org.ametiste.scm.messaging.data.event.InstanceStartupEvent
 import org.ametiste.scm.messaging.data.transport.TransportMessage
 import org.ametiste.scm.messaging.receiver.EventReceivingController
 import org.ametiste.scm.messaging.transport.http.dto.EventDTOMessage
 import org.ametiste.scm.messaging.transport.http.dto.InstanceLifecycleEventDTO
-import org.ametiste.scm.messaging.transport.http.dto.InstanceStartupEventDTO
-import org.ametiste.scm.broker.boot.config.EventBrokerTestConfiguration
-import org.ametiste.scm.broker.mock.EventSenderMock
-import org.ametiste.scm.broker.mock.EventSubscribersFetcherMock
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.boot.test.WebIntegrationTest
