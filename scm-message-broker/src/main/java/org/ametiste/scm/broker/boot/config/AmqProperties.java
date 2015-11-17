@@ -6,13 +6,39 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Properties for ActiveMQ Broker and queues.
  * <p>
  * Defined properties are included (org.ametiste.scm.broker.amq.*):
- * <ul>
- * <li>queue-name.raw-event - name of queue with raw event messages;</li>
- * <li>queue-name.aggregated-event - name of queue with aggregated lists of event messages;</li>
- * <li>broker-url - broker URL to configure ActiveMQ;</li>
- * <li>username - username to access to ActiveMQ instance;</li>
- * <li>password - password to access to ActiveMQ instance.</li>
- * </ul>
+ * <table summary="parameters description">
+ *     <tr><td>Name</td><td>Type</td><td>Description</td><td>Default</td></tr>
+ *     <tr>
+ *         <td>queue-name.raw-event</td>
+ *         <td>String</td>
+ *         <td>Name of queue with raw event messages.</td>
+ *         <td>queue.raw</td>
+ *     </tr>
+ *     <tr>
+ *         <td>queue-name.aggregated-event</td>
+ *         <td>String</td>
+ *         <td>Name of queue with aggregated lists of event messages.</td>
+ *         <td>queue.aggregated</td>
+ *     </tr>
+ *     <tr>
+ *         <td>broker-url</td>
+ *         <td>URI</td>
+ *         <td>Broker URL to configure ActiveMQ.</td>
+ *         <td>vm://localhost</td>
+ *     </tr>
+ *     <tr>
+ *         <td>username</td>
+ *         <td>String</td>
+ *         <td>Username to access to ActiveMQ instance.</td>
+ *         <td>(not defined)</td>
+ *     </tr>
+ *     <tr>
+ *         <td>password</td>
+ *         <td>String</td>
+ *         <td>Password to access to ActiveMQ instance.</td>
+ *         <td>(not defined)</td>
+ *     </tr>
+ * </table>
  * <p>
  * This properties is designed provide usable default configuration that provides embedded ActiveMQ Broker without
  * username/password access.
@@ -20,24 +46,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("org.ametiste.scm.broker.amq")
 public class AmqProperties {
 
-    /**
-     * Nested properties that contains names of used queues.
-     */
     private QueueName queueName;
 
-    /**
-     * Broker URL to configure ActiveMQ. Default is "vm://localhost".
-     */
     private String brokerUrl = "vm://localhost";
-
-    /**
-     * Username to access to ActiveMQ instance. No default value.
-     */
     private String username = "";
-
-    /**
-     * Password to access to ActiveMQ instance. No default value.
-     */
     private String password = "";
 
     public QueueName getQueueName() {
@@ -77,14 +89,7 @@ public class AmqProperties {
      */
     public static class QueueName {
 
-        /**
-         * Name of queue with raw event messages. Default value is "queue.raw".
-         */
         private String rawEvent = "queue.raw";
-
-        /**
-         * Name of queue with aggregated lists of event messages. Default value is "queue.aggregated".
-         */
         private String aggregatedEvent = "queue.aggregated";
 
         public String getRawEvent() {
