@@ -1,10 +1,12 @@
 package org.ametiste.scm.broker
 
 import org.ametiste.scm.messaging.data.event.Event
+import org.ametiste.scm.messaging.data.event.InstanceLifecycleEvent
 import org.ametiste.scm.messaging.data.event.InstanceStartupEvent
 import org.ametiste.scm.messaging.data.transport.TransportMessage
 import org.ametiste.scm.messaging.receiver.EventReceivingController
 import org.ametiste.scm.messaging.transport.http.dto.EventDTOMessage
+import org.ametiste.scm.messaging.transport.http.dto.InstanceLifecycleEventDTO
 import org.ametiste.scm.messaging.transport.http.dto.InstanceStartupEventDTO
 import org.ametiste.scm.broker.boot.config.EventBrokerTestConfiguration
 import org.ametiste.scm.broker.mock.EventSenderMock
@@ -16,6 +18,8 @@ import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 import java.util.stream.Collectors
+
+import static org.ametiste.scm.messaging.data.event.InstanceLifecycleEvent.Type.STARTUP
 
 @ContextConfiguration(classes = EventBrokerTestConfiguration.class, loader = SpringApplicationContextLoader.class)
 @WebIntegrationTest("server.port=0")
@@ -47,10 +51,10 @@ class EventBrokerIT extends Specification {
 
 
     private static Collection<TransportMessage<Event>> getTransportMessages() {
-        InstanceStartupEvent[] events = [
-            InstanceStartupEvent.builder().addInstanceId("APP1").addVersion("0.2.5").build(),
-            InstanceStartupEvent.builder().addInstanceId("APP2").addVersion("0.3.1").build()
+        InstanceLifecycleEvent[] events = [
+                InstanceLifecycleEvent.builder().type(STARTUP).instanceId("APP1").version("0.2.5").build(),
+                InstanceLifecycleEvent.builder().type(STARTUP).instanceId("APP2").version("0.3.1").build()
         ]
-        return Arrays.stream(events).map({e -> new EventDTOMessage(new InstanceStartupEventDTO(e))}).collect(Collectors.toList());
+        return Arrays.stream(events).map({e -> new EventDTOMessage(new InstanceLifecycleEventDTO(e))}).collect(Collectors.toList());
     }
 }
