@@ -30,13 +30,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *         <td>username</td>
  *         <td>String</td>
  *         <td>Username to access to ActiveMQ instance.</td>
- *         <td>(not defined)</td>
+ *         <td>"" (empty string)</td>
  *     </tr>
  *     <tr>
  *         <td>password</td>
  *         <td>String</td>
  *         <td>Password to access to ActiveMQ instance.</td>
- *         <td>(not defined)</td>
+ *         <td>"" (empty string)</td>
+ *     </tr>
+ *     <tr>
+ *         <td>maxRedeliveries</td>
+ *         <td>Integer</td>
+ *         <td>Number of redelivery retries.</td>
+ *         <td>-1 (infinite redelivery)</td>
  *     </tr>
  * </table>
  * <p>
@@ -51,6 +57,7 @@ public class AmqProperties {
     private String brokerUrl = "vm://localhost";
     private String username = "";
     private String password = "";
+    private int maxRedeliveries = -1;
 
     public QueueName getQueueName() {
         return queueName;
@@ -68,6 +75,10 @@ public class AmqProperties {
         return password;
     }
 
+    public int getMaxRedeliveries() {
+        return maxRedeliveries;
+    }
+
     public void setQueueName(QueueName queueName) {
         this.queueName = queueName;
     }
@@ -82,6 +93,10 @@ public class AmqProperties {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setMaxRedeliveries(int maxRedeliveries) {
+        this.maxRedeliveries = maxRedeliveries;
     }
 
     /**

@@ -22,26 +22,6 @@ public class ActiveMQConfiguration {
     private AmqProperties props;
 
     /**
-     * The redelivery policy is ignored (except of maximumRedeliveries, -1 is infinite redelivery) because redelivery
-     * is handled by the consumer which needs to be cached to ensure the previous delay is taken into account.
-     * Therefore the connection factory needs to be a CachingConnectionFactory. Unfortunately this won't work because
-     * the session is then also cached and won't have an associated transaction so rollback doesn't force redelivery.
-     * Configuration of redelivery on the broker is ignored.
-     * <p>
-     * The default Dead Letter Queue in ActiveMQ is called ActiveMQ.DLQ; in case of maximumRedeliveries greater than 0,
-     * all undeliverable messages will get sent to this queue (configuration of deadLetterStrategy on broker is ignored).
-     */
-    @Bean
-    public ActiveMQConnectionFactory amqConnectionFactory() {
-        ActiveMQConnectionFactory amqFactory = new ActiveMQConnectionFactory();
-        amqFactory.setRedeliveryPolicy(redeliveryPolicy());
-        amqFactory.setBrokerURL(props.getBrokerUrl());
-        amqFactory.setUserName(props.getUsername());
-        amqFactory.setPassword(props.getPassword());
-        return amqFactory;
-    }
-
-    /**
      * Set up the connection factory. You must name the bean "connectionFactory" for the JMS-backed channels to
      * automatically find it. Otherwise, you must specify the connection when you declare the channel.
      */
@@ -53,16 +33,27 @@ public class ActiveMQConfiguration {
     }
 
     @Bean
+    public ActiveMQConnectionFactory amqConnectionFactory() {
+        ActiveMQConnectionFactory amqFactory = new ActiveMQConnectionFactory();
+        amqFactory.setRedeliveryPolicy(redeliveryPolicy());
+        amqFactory.setBrokerURL(props.getBrokerUrl());
+        amqFactory.setUserName(props.getUsername());
+        amqFactory.setPassword(props.getPassword());
+        return amqFactory;
+    }
+
+    @Bean
+    public RedeliveryPolicy redeliveryPolicy() {
+        RedeliveryPolicy policy = new RedeliveryPolicy();
+        policy.setQueue("*");
+        policy.setMaximumRedeliveries(props.getMaxRedeliveries());
+        return policy;
+    }
+
+    @Bean
     public JmsTransactionManager jmsTransactionManager() {
         JmsTransactionManager manager = new JmsTransactionManager();
         manager.setConnectionFactory(connectionFactory());
         return manager;
-    }
-
-    private RedeliveryPolicy redeliveryPolicy() {
-        RedeliveryPolicy policy = new RedeliveryPolicy();
-        policy.setQueue("*");
-        policy.setMaximumRedeliveries(-1);
-        return policy;
     }
 }
