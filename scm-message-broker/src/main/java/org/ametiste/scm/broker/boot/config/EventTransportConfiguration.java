@@ -6,21 +6,17 @@ import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
- * Configuration that defines components for sending and receiving messages outbound the application.
- * <p>
- * Configuration enables {@code org.ametiste.scm.messaging.receiver.EventReceivingController} for receiving messages and
- * publish it with Spring ApplicationEventPublisher. Also config create beans for sending messages.
+ * Configuration that defines components for sending messages outbound the application. Event receiving mechanism
+ * includes with boot starter module.
  * <p>
  * Configuration enables {@code SenderClientProperties} to customize Http Client for event sending.
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("org.ametiste.scm.messaging.receiver")
 @EnableConfigurationProperties(SenderClientProperties.class)
 public class EventTransportConfiguration {
 

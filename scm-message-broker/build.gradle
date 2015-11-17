@@ -47,7 +47,8 @@ dependencies {
             libraries.slf4j
 
     compile libraries.ametisteScmMessagingComponents,
-            libraries.ametisteScmCoordinatorEureka
+            libraries.ametisteScmMessageReceiverStarter,
+            libraries.ametisteScmSubscribersFetcherStarter
 
     testCompile libraries.spock,
             libraries.spockSpring,

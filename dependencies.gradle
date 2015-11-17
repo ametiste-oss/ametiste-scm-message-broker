@@ -2,8 +2,8 @@ ext {
     activeMQVersion = '5.7.0'
     activeMQBrokerVersion = '5.12.0'
     commonLang3Version = '3.4'
-    ametisteScmCoordinatorVersion = '0.1.0-1-RC'
-    ametisteScmMessagingLibVersion = '0.1.0-1-RC'
+    ametisteScmCoordinatorVersion = '0.1.0-r1-RC'
+    ametisteScmMessagingLibVersion = '0.1.0-r1-RC'
     groovyVersion = '2.4.1'
     javaxServletVersion = '3.1.0'
     slf4jVersion = '1.7.12'
@@ -23,8 +23,12 @@ ext {
                     "org.ametiste.scm:scm-message-sender:${ametisteScmMessagingLibVersion}",
                     "org.ametiste.scm:scm-message-receiver:${ametisteScmMessagingLibVersion}"
             ],
+            ametisteScmMessageReceiverStarter :
+                    "org.ametiste.scm:scm-message-receiver-starter:${ametisteScmMessagingLibVersion}",
             ametisteScmCoordinatorEureka:
                     "org.ametiste.scm:scm-coordination-spring-cloud-eureka:${ametisteScmCoordinatorVersion}",
+            ametisteScmSubscribersFetcherStarter:
+                    "org.ametiste.scm:scm-coordination-fetcher-starter:${ametisteScmCoordinatorVersion}",
             javaxServlet    : "javax.servlet:javax.servlet-api:${javaxServletVersion}",
             slf4j           : [
                     "org.slf4j:slf4j-api:${slf4jVersion}",

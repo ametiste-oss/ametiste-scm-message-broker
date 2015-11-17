@@ -21,7 +21,7 @@ import org.springframework.context.event.EventListener;
  * aggregated messages to subscribes.
  */
 @Configuration
-@Import({EventTransportConfiguration.class, ScmSubscribersFetcherConfiguration.class})
+@Import(EventTransportConfiguration.class)
 @ImportResource("classpath:spring/integration/queue-config.xml")
 public class EventProcessingConfiguration {
 
