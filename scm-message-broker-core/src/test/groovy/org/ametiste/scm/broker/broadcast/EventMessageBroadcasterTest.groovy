@@ -26,9 +26,36 @@ class EventMessageBroadcasterTest extends Specification {
         broadcaster = new EventMessageBroadcaster(fetcher, eventSender)
     }
 
-    def "should nothing do with empty list of messages"() {
+    def "validation on create"() {
+        when: "create broadcaster with not initialized fetcher"
+        new EventMessageBroadcaster(null, eventSender)
+
+        then: "expect IllegalArgumentException thrown"
+        thrown(IllegalArgumentException.class)
+
+        when: "create broadcaster with not initialized sender"
+        new EventMessageBroadcaster(fetcher, null)
+
+        then: "expect IllegalArgumentException thrown"
+        thrown(IllegalArgumentException.class)
+
+        when: "create broadcaster with initialized arguments"
+        new EventMessageBroadcaster(fetcher, eventSender)
+
+        then: "expect IllegalArgumentException thrown"
+        noExceptionThrown()
+    }
+
+    def "should nothing do with empty or not initialized list of messages"() {
         when: "try send empty messages list"
         broadcaster.broadcast(Collections.emptyList())
+
+        then: "broadcaster nothing to do"
+        0 * eventSender.send(_,_)
+        0 * fetcher.fetchSubscribers()
+
+        when: "try send not initialized list"
+        broadcaster.broadcast(null)
 
         then: "broadcaster nothing to do"
         0 * eventSender.send(_,_)

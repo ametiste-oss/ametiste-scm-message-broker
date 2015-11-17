@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Import;
 @Import(EventBrokerConfiguration.class)
 public class EventBrokerApplication extends SpringBootServletInitializer {
 
+    private static Class<EventBrokerApplication> APPLICATION_CLASS = EventBrokerApplication.class;
+
     public static void main(String[] args) {
-        SpringApplication.run(applicationClass, args);
+        SpringApplication.run(APPLICATION_CLASS, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(applicationClass);
+        return application.sources(APPLICATION_CLASS);
     }
-
-    private static Class<EventBrokerApplication> applicationClass = EventBrokerApplication.class;
 }

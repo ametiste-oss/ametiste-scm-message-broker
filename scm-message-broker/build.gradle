@@ -38,18 +38,18 @@ configurations {
 }
 
 dependencies {
+    compile project(path: ':scm-message-broker-core')
+
     compile libraries.springBootWeb,
             libraries.springBootActuator,
             libraries.springIntegrationJms,
             libraries.activeMQ,
-            libraries.javaxServlet,
-            libraries.commonLang3,
-            libraries.slf4j
+            libraries.javaxServlet
 
-    compile libraries.ametisteScmMessagingComponents,
-            libraries.ametisteScmCoordinatorEureka
+    compile libraries.ametisteScmMessageReceiverStarter,
+            libraries.ametisteScmSubscribersFetcherStarter
 
     testCompile libraries.spock,
-            libraries.spockSpring,
-            libraries.springBootTest
+                libraries.spockSpring,
+                libraries.springBootTest
 }

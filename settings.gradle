@@ -1,2 +1,4 @@
 rootProject.name = "ametiste-scm-message-broker"
+
 include 'scm-message-broker'
+include 'scm-message-broker-core'

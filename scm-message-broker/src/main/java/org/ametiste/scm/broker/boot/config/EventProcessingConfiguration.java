@@ -3,7 +3,6 @@ package org.ametiste.scm.broker.boot.config;
 import org.ametiste.scm.broker.broadcast.EventMessageBroadcaster;
 import org.ametiste.scm.broker.processing.EventMessageProcessor;
 import org.ametiste.scm.coordinator.accessor.EventSubscribersFetcher;
-import org.ametiste.scm.coordinator.config.ScmSubscribersFetcherConfiguration;
 import org.ametiste.scm.messaging.data.transport.EventTransportMessage;
 import org.ametiste.scm.messaging.sender.EventSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import org.springframework.context.event.EventListener;
  * aggregated messages to subscribes.
  */
 @Configuration
-@Import({EventTransportConfiguration.class, ScmSubscribersFetcherConfiguration.class})
+@Import(EventTransportConfiguration.class)
 @ImportResource("classpath:spring/integration/queue-config.xml")
 public class EventProcessingConfiguration {
 

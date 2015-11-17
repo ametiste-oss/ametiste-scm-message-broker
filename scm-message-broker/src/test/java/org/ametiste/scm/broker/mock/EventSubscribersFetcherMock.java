@@ -29,7 +29,7 @@ public class EventSubscribersFetcherMock implements EventSubscribersFetcher {
                     new URI("http://subscriber2:8080/event-receiver")
             );
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 

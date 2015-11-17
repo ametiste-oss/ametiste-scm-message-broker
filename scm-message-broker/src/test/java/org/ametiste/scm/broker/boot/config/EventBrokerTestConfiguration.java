@@ -3,12 +3,8 @@ package org.ametiste.scm.broker.boot.config;
 import org.ametiste.scm.broker.mock.EventSenderMock;
 import org.ametiste.scm.broker.mock.EventSubscribersFetcherMock;
 import org.ametiste.scm.coordinator.accessor.EventSubscribersFetcher;
-import org.ametiste.scm.coordinator.accessor.FetchSubscribersException;
-import org.ametiste.scm.messaging.data.event.Event;
-import org.ametiste.scm.messaging.data.transport.TransportMessage;
-import org.ametiste.scm.messaging.sender.EventSendException;
+import org.ametiste.scm.coordinator.config.ScmSubscribersFetcherConfiguration;
 import org.ametiste.scm.messaging.sender.EventSender;
-import org.ametiste.scm.messaging.sender.HttpEventSender;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +20,7 @@ import java.net.URISyntaxException;
 @Configuration
 @EnableAutoConfiguration
 @EnableWebMvc
-@Import(EventBrokerConfiguration.class)
+@Import({EventBrokerConfiguration.class, ScmSubscribersFetcherConfiguration.class})
 public class EventBrokerTestConfiguration {
 
     @Bean
