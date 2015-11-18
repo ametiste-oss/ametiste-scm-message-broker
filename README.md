@@ -81,8 +81,6 @@ Service use ActiveMQ for storing queues of messages and has next properties:
 |`org.ametiste.scm.broker.amq.redelivery.maxRedeliveries`|integer|Number of redelivery retries.|`-1` (infinite redelivery)|
 |`org.ametiste.scm.broker.amq.redelivery.initialDelay`|integer|Initial redelivery delay and increase step (if exponential backoff disabled (in milliseconds).|`1000`|
 |`org.ametiste.scm.broker.amq.redelivery.maxDelay`|integer|Maximum value of redelivery delay (in milliseconds).|`30000`|
-|`org.ametiste.scm.broker.amq.redelivery.exponentialBackoff`|boolean|Enable exponential increase of delay.|`false`|
-|`org.ametiste.scm.broker.amq.redelivery.backoffMultiplier`|double|Delay multiply factor (in exponential mode).|`2.0`|
 
 ##### SCM Coordinator properties
 Broker use SCM SubscribersFetcher configuration from Scm Coordinator Library and require define properties for it:
