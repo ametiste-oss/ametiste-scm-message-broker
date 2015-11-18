@@ -87,11 +87,11 @@ public class AmqProperties {
     private String password = "";
 
     public QueueName getQueueName() {
-        return queueName;
+        return queueName = new QueueName();
     }
 
     public Redelivery getRedelivery() {
-        return redelivery;
+        return redelivery = new Redelivery();
     }
 
     public String getBrokerUrl() {
