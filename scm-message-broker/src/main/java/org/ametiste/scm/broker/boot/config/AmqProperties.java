@@ -30,13 +30,46 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *         <td>username</td>
  *         <td>String</td>
  *         <td>Username to access to ActiveMQ instance.</td>
- *         <td>(not defined)</td>
+ *         <td>"" (empty string)</td>
  *     </tr>
  *     <tr>
  *         <td>password</td>
  *         <td>String</td>
  *         <td>Password to access to ActiveMQ instance.</td>
- *         <td>(not defined)</td>
+ *         <td>"" (empty string)</td>
+ *     </tr>
+ * </table>
+ * Redelivery properties are included (org.ametiste.scm.broker.amq.redelivery.*):
+ * <table summary="parameters description">
+ *     <tr>
+ *         <td>maxRedeliveries</td>
+ *         <td>Integer</td>
+ *         <td>Number of redelivery retries.</td>
+ *         <td>-1 (infinite redelivery)</td>
+ *     </tr>
+ *     <tr>
+ *         <td>initialDelay</td>
+ *         <td>Integer</td>
+ *         <td>Initial redelivery delay and increase step (if exponential backoff disabled (in milliseconds).</td>
+ *         <td>1000</td>
+ *     </tr>
+ *     <tr>
+ *         <td>maxDelay</td>
+ *         <td>Integer</td>
+ *         <td>Maximum value of redelivery delay (in milliseconds).</td>
+ *         <td>30000</td>
+ *     </tr>
+ *     <tr>
+ *         <td>exponentialBackoff</td>
+ *         <td>boolean</td>
+ *         <td>Enable exponential increase of delay.</td>
+ *         <td>false</td>
+ *     </tr>
+ *     <tr>
+ *         <td>backoffMultiplier</td>
+ *         <td>double</td>
+ *         <td>Delay multiply factor (in exponential mode).</td>
+ *         <td>2.0</td>
  *     </tr>
  * </table>
  * <p>
@@ -46,7 +79,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("org.ametiste.scm.broker.amq")
 public class AmqProperties {
 
-    private QueueName queueName;
+    private QueueName queueName = new QueueName();
+    private Redelivery redelivery = new Redelivery();
 
     private String brokerUrl = "vm://localhost";
     private String username = "";
@@ -54,6 +88,10 @@ public class AmqProperties {
 
     public QueueName getQueueName() {
         return queueName;
+    }
+
+    public Redelivery getRedelivery() {
+        return redelivery;
     }
 
     public String getBrokerUrl() {
@@ -70,6 +108,10 @@ public class AmqProperties {
 
     public void setQueueName(QueueName queueName) {
         this.queueName = queueName;
+    }
+
+    public void setRedelivery(Redelivery redelivery) {
+        this.redelivery = redelivery;
     }
 
     public void setBrokerUrl(String brokerUrl) {
@@ -106,6 +148,57 @@ public class AmqProperties {
 
         public void setAggregatedEvent(String aggregatedEvent) {
             this.aggregatedEvent = aggregatedEvent;
+        }
+    }
+
+    public static class Redelivery {
+
+        private int maxRedeliveries = -1;
+
+        private int initialDelay = 1000;
+        private int maxDelay = 30000;
+
+        private boolean exponentialBackoff = false;
+        private double backoffMultiplier = 2.0;
+
+        public int getMaxRedeliveries() {
+            return maxRedeliveries;
+        }
+
+        public int getInitialDelay() {
+            return initialDelay;
+        }
+
+        public int getMaxDelay() {
+            return maxDelay;
+        }
+
+        public boolean isExponentialBackoff() {
+            return exponentialBackoff;
+        }
+
+        public double getBackoffMultiplier() {
+            return backoffMultiplier;
+        }
+
+        public void setMaxRedeliveries(int maxRedeliveries) {
+            this.maxRedeliveries = maxRedeliveries;
+        }
+
+        public void setInitialDelay(int initialDelay) {
+            this.initialDelay = initialDelay;
+        }
+
+        public void setMaxDelay(int maxDelay) {
+            this.maxDelay = maxDelay;
+        }
+
+        public void setExponentialBackoff(boolean exponentialBackoff) {
+            this.exponentialBackoff = exponentialBackoff;
+        }
+
+        public void setBackoffMultiplier(double backoffMultiplier) {
+            this.backoffMultiplier = backoffMultiplier;
         }
     }
 }
