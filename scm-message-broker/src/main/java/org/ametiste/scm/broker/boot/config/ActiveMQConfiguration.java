@@ -45,8 +45,14 @@ public class ActiveMQConfiguration {
     @Bean
     public RedeliveryPolicy redeliveryPolicy() {
         RedeliveryPolicy policy = new RedeliveryPolicy();
+
         policy.setQueue("*");
-        policy.setMaximumRedeliveries(props.getMaxRedeliveries());
+        policy.setMaximumRedeliveries(props.getRedelivery().getMaxRedeliveries());
+        policy.setInitialRedeliveryDelay(props.getRedelivery().getInitialDelay());
+        policy.setMaximumRedeliveryDelay(props.getRedelivery().getMaxDelay());
+        policy.setBackOffMultiplier(props.getRedelivery().getBackoffMultiplier());
+        policy.setUseExponentialBackOff(props.getRedelivery().isExponentialBackoff());
+
         return policy;
     }
 
