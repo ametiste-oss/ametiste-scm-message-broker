@@ -10,6 +10,7 @@
 
        <context:annotation-config/>
        <bean class="org.ametiste.scm.broker.boot.config.ActiveMQConfiguration"/>
+       <bean class="org.ametiste.scm.broker.boot.config.RetryPolicyConfiguration"/>
 
        <context:property-placeholder location="classpath:application.properties"/>
 
@@ -33,7 +34,12 @@
                         connection-factory="connectionFactory"
                         transaction-manager="jmsTransactionManager"/>
 
-       <int:service-activator input-channel="jmsEventMessageChannel" ref="eventMessageBroadcaster" method="broadcast"/>
+
+       <int:service-activator input-channel="jmsEventMessageChannel" ref="eventMessageBroadcaster" method="broadcast">
+              <int:request-handler-advice-chain>
+                     <int:ref bean="sendMessagesRetryAdvice"/>
+              </int:request-handler-advice-chain>
+       </int:service-activator>
 
        <int:poller default="true" fixed-delay="${org.ametiste.scm.broker.broadcast.timeout}"/>
 </beans>

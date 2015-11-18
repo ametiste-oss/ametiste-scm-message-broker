@@ -59,18 +59,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *         <td>Maximum value of redelivery delay (in milliseconds).</td>
  *         <td>30000</td>
  *     </tr>
- *     <tr>
- *         <td>exponentialBackoff</td>
- *         <td>boolean</td>
- *         <td>Enable exponential increase of delay.</td>
- *         <td>false</td>
- *     </tr>
- *     <tr>
- *         <td>backoffMultiplier</td>
- *         <td>double</td>
- *         <td>Delay multiply factor (in exponential mode).</td>
- *         <td>2.0</td>
- *     </tr>
  * </table>
  * <p>
  * This properties is designed provide usable default configuration that provides embedded ActiveMQ Broker without
@@ -151,15 +139,15 @@ public class AmqProperties {
         }
     }
 
+    /**
+     * Nested properties for ActiveMQ redelivery policy parameters.
+     */
     public static class Redelivery {
 
         private int maxRedeliveries = -1;
 
         private int initialDelay = 1000;
         private int maxDelay = 30000;
-
-        private boolean exponentialBackoff = false;
-        private double backoffMultiplier = 2.0;
 
         public int getMaxRedeliveries() {
             return maxRedeliveries;
@@ -173,14 +161,6 @@ public class AmqProperties {
             return maxDelay;
         }
 
-        public boolean isExponentialBackoff() {
-            return exponentialBackoff;
-        }
-
-        public double getBackoffMultiplier() {
-            return backoffMultiplier;
-        }
-
         public void setMaxRedeliveries(int maxRedeliveries) {
             this.maxRedeliveries = maxRedeliveries;
         }
@@ -191,14 +171,6 @@ public class AmqProperties {
 
         public void setMaxDelay(int maxDelay) {
             this.maxDelay = maxDelay;
-        }
-
-        public void setExponentialBackoff(boolean exponentialBackoff) {
-            this.exponentialBackoff = exponentialBackoff;
-        }
-
-        public void setBackoffMultiplier(double backoffMultiplier) {
-            this.backoffMultiplier = backoffMultiplier;
         }
     }
 }
