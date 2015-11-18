@@ -79,19 +79,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("org.ametiste.scm.broker.amq")
 public class AmqProperties {
 
-    private QueueName queueName;
-    private Redelivery redelivery;
+    private QueueName queueName = new QueueName();
+    private Redelivery redelivery = new Redelivery();
 
     private String brokerUrl = "vm://localhost";
     private String username = "";
     private String password = "";
 
     public QueueName getQueueName() {
-        return queueName = new QueueName();
+        return queueName;
     }
 
     public Redelivery getRedelivery() {
-        return redelivery = new Redelivery();
+        return redelivery;
     }
 
     public String getBrokerUrl() {
