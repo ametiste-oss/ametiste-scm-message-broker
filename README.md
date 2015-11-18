@@ -63,10 +63,21 @@ Application has few sets of properties separated by functional modules.
 
 |Name|Type|Description|Default|
 |----|----|-----------|-------|
-|`org.ametiste.scm.sender.client.connect-timeout`|integer|Connection timeout for HTTP client (in milliseconds)|`1000`|
-|`org.ametiste.scm.sender.client.read-timeout`|integer|Read timeout for HTTP client (in milliseconds)|`1000`|
+|`org.ametiste.scm.broker.sender.client.connect-timeout`|integer|Connection timeout for HTTP client (in milliseconds)|`1000`|
+|`org.ametiste.scm.broker.sender.client.read-timeout`|integer|Read timeout for HTTP client (in milliseconds)|`1000`|
 
 *Note*: if parameters not defined default values will be used.
+
+##### Retry sending properties
+
+|Name|Type|Description|Default|
+|----|----|-----------|-------|
+|`org.ametiste.scm.broker.sender.retry.maxAttempts`|int|Maximum number of attempts.|`5`|
+|`org.ametiste.scm.broker.sender.retry.interval`|int|Interval between retry attempts (in milliseconds).|`1000`|
+|`org.ametiste.scm.broker.sender.retry.exponentialBackOff`|boolean|Enables exponential backoff policy.|`false`|
+|`org.ametiste.scm.broker.sender.retry.maxInterval`|int|Maximum interval between attempts in case when {@literal exponentialBackOff} is enabled (in milliseconds).|`30000`|
+|`org.ametiste.scm.broker.sender.retry.multiplier`|double|Multiplier for {@literal exponentialBackOff} policy.|`3.0`|
+
 
 ##### ActiveMQ properties
 Service use ActiveMQ for storing queues of messages and has next properties:
